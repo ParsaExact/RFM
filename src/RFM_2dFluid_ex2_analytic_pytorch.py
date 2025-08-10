@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-Created on 2022.6
 
-@author: Xurong Chi
-"""
 
 import time
 import math

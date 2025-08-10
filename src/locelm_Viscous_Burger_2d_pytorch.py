@@ -28,9 +28,9 @@ def weights_init(m):
         #nn.init.normal_(m.bias, mean=0, std=1)
 
 
-class RFM(nn.Module):
+class local_rep(nn.Module):
     def __init__(self, in_features, out_features, hidden_layers, M, x_max, x_min, t_max, t_min):
-        super(RFM, self).__init__()
+        super(local_rep, self).__init__()
         self.in_features = in_features
         self.out_features = out_features
         self.hidden_features = M
@@ -100,7 +100,7 @@ def pre_define(Nx,Nt,M,Qx,Qt):
         for n in range(Nt):
             t_min = tf/Nt * n
             t_max = tf/Nt * (n+1)
-            model = RFM(in_features = 2, out_features = 1, hidden_layers = 1, M = M, x_min = x_min, 
+            model = local_rep(in_features = 2, out_features = 1, hidden_layers = 1, M = M, x_min = x_min, 
                               x_max = x_max, t_min = t_min, t_max = t_max)
             model = model.apply(weights_init)
             model = model.double()
