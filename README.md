@@ -1,62 +1,58 @@
-# Random Feature Method (RFM) for Partial Differential Equations
+# Random Feature Method for PDEs
 
-This repository contains my research work on the Random Feature Method (RFM), a novel numerical approach for solving partial differential equations that combines the advantages of classical numerical methods with machine learning techniques.
+This repository contains implementations of the Random Feature Method (RFM) for solving partial differential equations. RFM is a meshfree approach that combines ideas from classical numerical methods and machine learning to solve PDEs efficiently.
 
-## 🔍 Overview
+## What is RFM?
 
-The Random Feature Method is a meshfree numerical approach that bridges classical numerical methods and machine learning for solving PDEs. Unlike traditional finite difference or finite element methods that rely on mesh generation, RFM uses random feature functions to construct numerical solutions while maintaining the linear optimization framework of classical methods.
+The Random Feature Method uses random feature functions to approximate solutions to PDEs without requiring mesh generation. Unlike traditional finite difference or finite element methods, RFM can handle complex geometries more easily while maintaining the linear optimization framework that makes classical methods reliable.
 
-### Key Advantages
-- **Meshfree**: No complex mesh generation required, handles complex geometries easily
-- **Linear Optimization**: Avoids non-convex optimization issues common in neural network approaches
-- **Spectral Accuracy**: Achieves high convergence rates
-- **Scalable**: Suitable for high-dimensional problems
-- **Stable**: Maintains theoretical convergence guarantees
+Main benefits:
+- No mesh generation needed
+- Works well with complex geometries  
+- Avoids non-convex optimization problems
+- Can achieve spectral convergence rates
+- Scales better to high dimensions
 
-## 📚 Implemented Applications
+## Implemented Problems
 
-This repository demonstrates RFM implementations for various physical problems:
+I've implemented RFM for several different types of PDEs:
 
-### 1. **Schrödinger Equation** (`RFM_Schodinger_equation.ipynb`)
-- Nonlinear Schrödinger equation solver
-- Complex-valued neural networks
-- Bright soliton validation
+**Schrödinger Equation** (`RFM_Schodinger_equation.ipynb`)  
+Solves the nonlinear Schrödinger equation using complex-valued networks. Includes validation against analytical bright soliton solutions.
 
-### 2. **2D Elasticity Problems** (`RFM_2dElasticity_Ⅰ_calculate.py`)
-- Linear elasticity in 2D domains
-- Stress and displacement field calculations
-- Neumann boundary condition handling
+**2D Elasticity** (`RFM_2dElasticity_Ⅰ_calculate.py`)  
+Linear elasticity problems in 2D domains. Computes stress and displacement fields with proper handling of Neumann boundary conditions.
 
-### 3. **Fluid Dynamics** (`RFM_2dFluid_ex2_analytic_pytorch.py`)
-- 2D Stokes flow equations
-- Velocity and pressure field computation
-- Complex domain geometries with circular obstacles
+**Fluid Dynamics** (`RFM_2dFluid_ex2_analytic_pytorch.py`)  
+2D Stokes flow equations for incompressible viscous flow. Handles domains with circular obstacles and computes velocity/pressure fields.
 
-### 4. **Timoshenko Beam Theory** (`RFM_Timoshenko_beam_pytorch.py`)
-- Structural mechanics beam analysis
-- Deflection and stress calculations
-- Engineering applications
+**Timoshenko Beams** (`RFM_Timoshenko_beam_pytorch.py`)  
+Beam bending analysis using Timoshenko theory. Calculates deflections and stresses for structural engineering applications.
 
-### 5. **Viscous Burgers' Equation** (`RFM_Viscous_Burger_2d_pytorch.py`)
-- Nonlinear convection-diffusion equation
-- 2D implementation with time evolution
-- Shock wave propagation
+**Viscous Burgers' Equation** (`RFM_Viscous_Burger_2d_pytorch.py`)  
+Nonlinear convection-diffusion equation with time evolution. Demonstrates shock wave propagation in 2D.
 
-## 🛠️ Technical Implementation
+## Implementation Details
 
-### Core Architecture
-- **PyTorch-based**: Leverages automatic differentiation for gradient calculations
-- **Modular Design**: Separate implementations for different equation types
-- **Local Networks**: Domain decomposition with local neural networks
-- **Linear Solver**: Uses `scipy.linalg.lstsq` for efficient linear system solution
+The code is built on PyTorch for automatic differentiation. Each implementation follows a similar pattern:
+- Domain decomposition with local neural networks
+- Random feature generation for basis functions
+- Assembly of linear system Au = f
+- Solution using scipy's linear solvers
 
+Most implementations include analytical test cases for validation and error analysis using L² and L∞ norms.
 
-## 📊 Results and Validation
+## Usage
 
-The implementations include:
-- **Analytical Comparisons**: Validation against known exact solutions
-- **Error Analysis**: L² and L∞ norm computations
-- **Convergence Studies**: Rate analysis with varying parameters
-- **Visualization**: Error distribution and solution field plots
+Requirements: `torch`, `numpy`, `scipy`, `matplotlib`
+
+Run individual examples:
+```bash
+python src/RFM_2dElasticity_Ⅰ_calculate.py
+python src/RFM_2dFluid_ex2_analytic_pytorch.py  
+python src/RFM_Viscous_Burger_2d_pytorch.py
+```
+
+The Jupyter notebooks can be opened directly for interactive exploration.
 
 
